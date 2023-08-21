@@ -1,0 +1,3 @@
+/home/lux/CLionProjects/cpi/cmake-build-debug/CMakeFiles/cpi.dir
+/home/lux/CLionProjects/cpi/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/lux/CLionProjects/cpi/cmake-build-debug/CMakeFiles/rebuild_cache.dir
