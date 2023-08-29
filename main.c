@@ -1,6 +1,15 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include "include/utils.h"
+
+
 
 int main() {
-    printf("Hello, World!\n");
+    help();
+    listAll();
+//    install("cli");
+     uninstall("cli");
+
+    list();
     return 0;
 }

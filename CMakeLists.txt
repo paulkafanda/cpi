@@ -3,4 +3,6 @@ project(cpi C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(cpi main.c)
+add_executable(cpi main.c
+        vendor/cli/src/cli.c
+        src/utils.c)
