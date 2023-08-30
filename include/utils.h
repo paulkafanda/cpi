@@ -14,6 +14,11 @@
 #define SRC_FOLDER "src"
 #define PACMAN "pacman.cpi"
 #define VENDOR "vendor"
+#define INSTALL "-i"
+#define UNINSTALL "-u"
+#define LIST "-l"
+#define LIST_ALL "-la"
+#define HELP "-h"
 
 
 typedef struct Package {
@@ -74,4 +79,8 @@ void list();
  * List all package installed in /home/lux/CLionProjects/cpi/package
  */
 void listAll();
+
+void unknown_command(char * command);
+void package_not_found(char * package);
+void package_not_installed(char * package);
 #endif //CPI_UTILS_H

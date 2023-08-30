@@ -31,13 +31,30 @@ bool generatePacman() {
  * Show the help message
  */
 void help() {
-    printf("This is cpi, a package manager for C\n");
-    printf("Usage: cpi [command] [package]\n");
-    printf("Commands:\n");
-    printf("    install: install a package\n");
-    printf("    uninstall: remove a package\n");
-    printf("    list: list all packages installed\n");
-    printf("    help: show this help\n");
+    printf("\nThis is cpi, a package manager for C\n");
+    printf("Usage: cpi [");
+    printColorText("command", NULL, CYAN);
+    printf("] [");
+    printColorText("package", NULL, MAGENTA);
+    printf("]\n");
+
+    printColorTextLn("Commands:", NULL, CYAN);
+    printColorText("    -i ", NULL, CYAN);
+    printColorText("package_name", NULL, MAGENTA);
+    printf("%2s install a package\n", ":");
+
+    printColorText("    -u ", NULL, CYAN);
+    printColorText("package_name", NULL, MAGENTA);
+    printf("%2s remove a package\n", ":");
+
+    printColorText("    -l", NULL, CYAN);
+    printf("%15s list installed packages\n", ":");
+
+    printColorText("    -la", NULL, CYAN);
+    printf("%14s list all available packages\n", ":");
+
+    printColorText("    help", NULL, CYAN);
+    printf("%13s show this help\n\n", ":");
 }
 
 /*
@@ -60,7 +77,7 @@ bool isPackage(char *packageName) {
     sprintf(string, "%s/%s/%s", PACKAGE_FOLDER, packageName, include);
     DIR *dir = opendir(string);
     if(dir == NULL) {
-        printf("Error while opening directory: %s\n", string);
+        //printf("Error while opening directory: %s\n", string);
         return false;
     }
     closedir(dir);
@@ -69,7 +86,7 @@ bool isPackage(char *packageName) {
     sprintf(string, "%s/%s/%s", PACKAGE_FOLDER, packageName, src);
     dir = opendir(string);
     if(dir == NULL) {
-        printf("Error while opening directory: %s\n", string);
+        //printf("Error while opening directory: %s\n", string);
         return false;
     }
     closedir(dir);
@@ -180,7 +197,9 @@ bool install(char * packageName) {
         free(command);
 
         if(addToPacman(package)) {
-            printf("Package %s installed successfully\n", packageName);
+            printf("Package [");
+            printColorText("%s", packageName, GREEN);
+            printf("] was successfully installed\n");
             free(package);
             return true;
         }
@@ -198,7 +217,9 @@ bool uninstall(char * packageName) {
 
         if(removeFromPacman(packageName)) {
             //printf("Package %s uninstalled successfully\n", packageName);
-            printColorTextLn("Package %s uninstalled successfully\n", packageName, GREEN);
+            printf("Package [");
+            printColorText("%s", packageName, YELLOW);
+            printf("] was successfully uninstalled\n");
             return true;
         }
     }
@@ -212,7 +233,7 @@ void list() {
         int counter = 0;
 
         printf("-----------------------------------------------------------------------------\n");
-        printf("\t   List of all packages locally installed in %s\n", VENDOR);
+        printColorTextLn("\t   List of all packages locally installed in %s", VENDOR, CYAN);
         printf("-----------------------------------------------------------------------------\n\n");
 
         while(fread(package, sizeof(Package), 1, file) == 1) {
@@ -241,7 +262,7 @@ void listAll() {
     }
 
     printf("-----------------------------------------------------------------------------\n");
-    printf("    List of all packages installed in %s\n", PACKAGE_FOLDER);
+    printColorTextLn("    List of all packages installed in %s", PACKAGE_FOLDER, CYAN);
     printf("-----------------------------------------------------------------------------\n\n");
 
     while((de = readdir(dir)) != NULL) {
@@ -252,6 +273,23 @@ void listAll() {
 
     printf("\n-----------------------------------------------------------------------------\n");
 
-    printf("this is the current directory: %s\n", wd);
     closedir(dir);
+}
+
+void unknown_command(char * command) {
+    printf("Unknown command [");
+    printColorText("%s", command, RED);
+    printf("]\n");
+}
+
+void package_not_found(char * package) {
+    printf("Package [");
+    printColorText("%s", package, RED);
+    printf("] not found\n");
+}
+
+void package_not_installed(char * package) {
+    printf("Package [");
+    printColorText("%s", package, YELLOW);
+    printf("] is currently not installed\n");
 }
