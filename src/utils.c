@@ -53,7 +53,7 @@ void help() {
     printColorText("    -la", NULL, CYAN);
     printf("%14s list all available packages\n", ":");
 
-    printColorText("    help", NULL, CYAN);
+    printColorText("    -h", NULL, CYAN);
     printf("%13s show this help\n\n", ":");
 }
 

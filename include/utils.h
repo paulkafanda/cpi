@@ -15,10 +15,15 @@
 #define PACMAN "pacman.cpi"
 #define VENDOR "vendor"
 #define INSTALL "-i"
+#define INSTALL_FULL "--install"
 #define UNINSTALL "-u"
+#define UNINSTALL_FULL "--uninstall"
 #define LIST "-l"
+#define LIST_FULL "--list"
 #define LIST_ALL "-la"
+#define LIST_ALL_FULL "--list_all"
 #define HELP "-h"
+#define HELP_FULL "--help"
 
 
 typedef struct Package {
